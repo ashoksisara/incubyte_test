@@ -19,4 +19,8 @@ void main() {
   test('Support newline as delimiter between numbers', () {
     expect(calculator.add('1\n2,3'), 6);
   });
+
+  test('Custom delimiter defined with // should be supported', () {
+    expect(calculator.add('//;\n1;2'), 3);
+  });
 }
