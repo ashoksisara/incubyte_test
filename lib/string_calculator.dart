@@ -15,9 +15,15 @@ class StringCalculator {
       input = input.substring(delimiterLineEnd + 1);
     }
 
-    // Split using all valid delimiters
-    final pattern = delimiters.map(RegExp.escape).join('|');
-    final parts = input.split(RegExp(pattern));
-    return parts.map(int.parse).reduce((a, b) => a + b);
+    final parts = input.split(RegExp(delimiters.map(RegExp.escape).join('|')));
+    final numbers = parts.map(int.parse).toList();
+
+    // Check for negatives
+    final negatives = numbers.where((n) => n < 0).toList();
+    if (negatives.isNotEmpty) {
+      throw Exception('negative numbers not allowed ${negatives.join(',')}');
+    }
+
+    return numbers.reduce((a, b) => a + b); // Return the sum of the numbers
   }
 }
