@@ -4,12 +4,8 @@ class StringCalculator {
       return 0; // Return 0 for empty string
     }
 
-    // Handle cases with multiple numbers separated by commas
-    if (input.contains(',')) {
-      final parts = input.split(',');
-      return parts.map(int.parse).reduce((a, b) => a + b); // Sum the numbers
-    }
-
-    return int.parse(input); //handle single number input
+    // Handle cases with multiple numbers separated by commas or newlines
+    final parts = input.split(RegExp('[,\n]'));
+    return parts.map(int.parse).reduce((a, b) => a + b);
   }
 }
